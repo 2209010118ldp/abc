@@ -1,0 +1,154 @@
+// ==UserScript==
+// @name         评论采集
+// @version      1.0
+// @description  支持淘宝拼多多评论采集
+// @author       和风鱼
+// @match        *://*.taobao.com/*
+// @match        *://*detail.tmall.com/*
+// @match        *://*mobile.yangkeduo.com/*
+// @grant        GM_addStyle
+// @icon         data:image/png;base64,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
+// ==/UserScript==
+
+(function() {
+    'use strict';
+      // 添加样式
+    GM_addStyle(`
+        #floating-ball {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 70px;
+            height: 40px;
+            background-color: #003366;
+            color: white;
+            font-size:15px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 999999;
+        }
+        #floating-content {
+            position: fixed;
+            top: 72px;
+            right: 5px;
+            display: none;
+            width: 300px;
+            font-size:15px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 9998;
+        }`);
+    // 创建悬浮球
+    const ball = document.createElement('div');
+    ball.id = 'floating-ball';
+    ball.textContent = '评论采集';
+    document.body.appendChild(ball);
+    // 创建悬浮窗的元素
+    const floatingDiv = document.createElement('div');
+    let css_selector='.content--FpIOzHeP';
+    floatingDiv.id = 123; // 设置悬浮窗的 ID
+    floatingDiv.style.position = 'fixed';
+    floatingDiv.style.top = '72px';
+    floatingDiv.style.right = '20px';
+    floatingDiv.style.width = '200px';
+    floatingDiv.style.padding = '10px';
+    floatingDiv.style.fontSize = '15px'; // 设置字体大小
+    floatingDiv.style.backgroundColor = '#003366'; // 深蓝色
+    floatingDiv.style.color = '#fff'; // 设置字体颜色为白色，以便与深蓝色背景有良好的对比
+    floatingDiv.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+    floatingDiv.style.zIndex = '1000000';
+    floatingDiv.style.display = 'block'; // 强制显示，更易于测试
+
+     // 点击悬浮球显示内容
+    ball.addEventListener('click', (e) => {
+        floatingDiv.style.display = floatingDiv.style.display === 'block' ? 'none' : 'block';
+    });
+
+   // 创建输入框
+    const inputBox = document.createElement('input');
+    inputBox.placeholder = '输入 CSS 选择器';
+    inputBox.style.width = '100%';
+    inputBox.style.padding = '5px';
+    inputBox.style.marginTop = '10px';
+    inputBox.style.border = '1px solid #ccc';
+
+    // 创建开始按钮
+    const startButton = document.createElement('button');
+    startButton.innerText = '开始';
+    startButton.style.width = '100%';
+    startButton.style.backgroundColor = '#28a745'; // 绿色按钮
+    startButton.style.color = '#fff'; // 按钮字体颜色
+    startButton.style.border = 'none';
+    startButton.style.padding = '10px';
+    startButton.style.marginTop = '5px';
+    startButton.style.cursor = 'pointer';
+
+    // 定义一个变量以存储找到的元素
+    let Text = [];
+
+    // 添加开始按钮的点击事件
+    startButton.addEventListener('click', () => {
+        if(inputBox.value!=='')
+        {
+            css_selector = inputBox.value;
+        }// 获取输入框内容
+        const elements = document.querySelectorAll(css_selector); // 获取符合选择器的元素
+
+        if (elements.length > 0) {
+            // 可以在这里执行进一步的操作，例如高亮显示找到的元素
+            elements.forEach(element => {
+                element.style.border = '2px solid yellow'; // 示意：高亮显示
+                Text.push(element.textContent); // 存储找到的元素到数组
+                console.log(element.textContent);
+            });
+        } else {
+            alert('未找到符合该选择器的元素。');
+        }
+
+        // 返回找到的元素
+        return Text;
+    });
+        
+    // 创建保存按钮
+    const saveButton = document.createElement('button');
+    saveButton.innerText = '保存为 CSV';
+    saveButton.style.width = '100%';
+    saveButton.style.backgroundColor = '#007BFF'; // 蓝色按钮
+    saveButton.style.color = '#fff'; // 按钮字体颜色
+    saveButton.style.border = 'none';
+    saveButton.style.padding = '10px';
+    saveButton.style.marginTop = '5px';
+    saveButton.style.cursor = 'pointer';
+
+    // 添加保存按钮的点击事件
+    saveButton.addEventListener('click', () => {
+        if (Text.length === 0) {
+            alert('没有找到任何元素内容！请先使用开始按钮。');
+            return;
+        }
+        const csvContent = "data:text/csv;charset=utf-8," + Text.map(e => `"${e}"`).join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "elements.csv");
+        document.body.appendChild(link); // 必须放在 DOM 中，才能触发点击
+        link.click(); // 触发下载
+        document.body.removeChild(link); // 下载后移除链接
+    });
+
+    // 添加内容区域
+    const contentDiv = document.createElement('div');
+    contentDiv.style.display = 'block'; // 强制显示内容区域
+
+    // 将元素添加到悬浮窗
+    //floatingDiv.appendChild(toggleButton);
+    floatingDiv.appendChild(contentDiv);
+    floatingDiv.appendChild(inputBox); // 添加输入框
+    floatingDiv.appendChild(startButton); // 添加开始按钮
+    floatingDiv.appendChild(saveButton); // 添加保存按钮
+    document.body.appendChild(floatingDiv);
+})();
